@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Génération de Script Tampermonkey</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #62b5ad, #104f73);
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+        .container3 {
+            background-color: #204f53;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+            animation: fade-in 3s ease-in-out;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            background-color: #575757;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="programmation_tt.html">Programmer action pour TT</a></li>
+        <li><a href="extinction_pc.html">Programmer l'extinction du PC</a></li>
+        <li><a href="script_tampermonkey.html">Génération de Script Tampermonkey</a></li>
+    </ul>
+</nav>
+
+<div class="container3">
+    <h2>Génération de Script Tampermonkey</h2>
+
+    <!-- Champ pour entrer le login et le mot de passe -->
+    <div class="form-group">
+        <label for="tampermonkeyLogin">Login :</label>
+        <input type="text" id="tampermonkeyLogin" placeholder="Entrer le login">
+    </div>
+
+    <div class="form-group">
+        <label for="tampermonkeyPassword">Mot de passe (texte visible) :</label>
+        <input type="text" id="tampermonkeyPassword" placeholder="Entrer le mot de passe">
+    </div>
+
+    <!-- Champ pour définir la date, heure, minute et seconde pour saisir le login et le mot de passe -->
+    <div class="form-group">
+        <label for="loginDate">Date pour saisir le Login et le Mot de passe :</label>
+        <input type="date" id="loginDate">
+    </div>
+    <div class="form-group">
+        <label for="loginTime">Heure pour saisir le Login et le Mot de passe (HH:MM:SS) :</label>
+        <input type="time" id="loginTime" step="1">
+    </div>
+
+    <!-- Champ pour définir la date, heure, minute et seconde pour soumettre le formulaire -->
+    <div class="form-group">
+        <label for="submitDate">Date pour soumettre le formulaire :</label>
+        <input type="date" id="submitDate">
+    </div>
+    <div class="form-group">
+        <label for="submitTime">Heure pour soumettre le formulaire (HH:MM:SS) :</label>
+        <input type="time" id="submitTime" step="1">
+    </div>
+
+    <!-- Champ pour définir la date, heure, minute et seconde pour cliquer sur le bouton d'action -->
+    <div class="form-group">
+        <label for="actionDate">Date pour cliquer sur le bouton d'action :</label>
+        <input type="date" id="actionDate">
+    </div>
+    <div class="form-group">
+        <label for="actionTime">Heure pour cliquer sur le bouton d'action (HH:MM:SS) :</label>
+        <input type="time" id="actionTime" step="1">
+    </div>
+
+    <!-- Liste déroulante pour choisir le bouton d'action -->
+    <div class="form-group">
+        <label for="actionButton">Nom du bouton d'action :</label>
+        <select id="actionButton">
+            <option value="btn-ctrl-pause">Pause</option>
+            <option value="confirmTakingPause">Confirmation Pause</option>
+            <option value="btn-ctrl-reprise">Reprise</option>
+            <option value="btn-ctrl-fin">Fin de Shift</option>
+            <option value="confirmFinShift">Confirmation Fin de Shift</option>
+            <option value="btn-ctrl-debut">Début</option>
+        </select>
+    </div>
+
+    <!-- Bouton pour générer le script -->
+    <button id="generateTampermonkeyCodeBtn">Générer le script Tampermonkey</button>
+
+    <!-- Zone de texte pour afficher le code généré -->
+    <div class="form-group">
+        <label for="tampermonkeyCode">Code généré :</label>
+        <textarea id="tampermonkeyCode" readonly></textarea>
+    </div>
+
+    <!-- Bouton pour copier le code généré -->
+    <button id="copyTampermonkeyCodeBtn">Copier le code</button>
+</div>
+
+<script>
+    const generateTampermonkeyCodeBtn = document.getElementById('generateTampermonkeyCodeBtn');
+    const tampermonkeyCode = document.getElementById('tampermonkeyCode');
+    const copyTampermonkeyCodeBtn = document.getElementById('copyTampermonkeyCodeBtn');
+    const tampermonkeyLogin = document.getElementById('tampermonkeyLogin');
+    const tampermonkeyPassword = document.getElementById('tampermonkeyPassword');
+    const loginDate = document.getElementById('loginDate');
+    const loginTime = document.getElementById('loginTime');
+    const submitDate = document.getElementById('submitDate');
+    const submitTime = document.getElementById('submitTime');
+    const actionDate = document.getElementById('actionDate');
+    const actionTime = document.getElementById('actionTime');
+    const actionButton = document.getElementById('actionButton');
+
+    function getTimeDifference(date, time) {
+        const now = new Date();
+        const targetDateTime = new Date(date + 'T' + time);
+
+        const difference = targetDateTime - now;
+        return difference > 0 ? difference : 0;
+    }
+
+    generateTampermonkeyCodeBtn.addEventListener('click', function() {
+        const login = tampermonkeyLogin.value;
+        const password = tampermonkeyPassword.value;
+        const loginDateTime = getTimeDifference(loginDate.value, loginTime.value);
+        const submitDateTime = getTimeDifference(submitDate.value, submitTime.value);
+        const actionDateTime = getTimeDifference(actionDate.value, actionTime.value);
+        const actionButtonValue = actionButton.value;
+
+        if (!login || !password || !loginDateTime || !submitDateTime || !actionDateTime || !actionButtonValue) {
+            alert("Veuillez remplir tous les champs.");
+            return;
+        }
+
+        let code = `// ==UserScript==\n`;
+        code += `// @name         Auto Login and Start Task\n`;
+        code += `// @namespace    http://tampermonkey.net/\n`;
+        code += `// @version      1.0\n`;
+        code += `// @description  Auto login and start task on time tracking system\n`;
+        code += `// @author       You\n`;
+        code += `// @match        http://192.168.0.247/time-tracking/index.php/auth/login\n`;
+        code += `// @match        http://192.168.0.247/time-tracking/index.php/dashboard/index\n`;
+        code += `// @grant        none\n`;
+        code += `// ==/UserScript==\n\n`;
+        code += `(function() {\n`;
+        code += `    'use strict';\n\n`;
+        code += `    // Définir le login et le mot de passe\n`;
+        code += `    const username = '${login}';\n`;
+        code += `    const password = '${password}';\n\n`;
+
+        code += `    if (window.location.href.includes("auth/login")) {\n`;
+        code += `        const loginCheckInterval = setInterval(() => {\n`;
+        code += `            const now = new Date();\n`;
+        code += `            const loginTarget = new Date('${loginDate.value}T${loginTime.value}');\n`;
+        code += `            if (now >= loginTarget) {\n`;
+        code += `                document.querySelector('input[name="tt_username"]').value = username;\n`;
+        code += `                document.querySelector('input[name="tt_pwd"]').value = password;\n`;
+        code += `                clearInterval(loginCheckInterval);\n`;
+        code += `            }\n`;
+        code += `        }, 1000);\n\n`;
+
+        code += `        const submitCheckInterval = setInterval(() => {\n`;
+        code += `            const now = new Date();\n`;
+        code += `            const submitTarget = new Date('${submitDate.value}T${submitTime.value}');\n`;
+        code += `            if (now >= submitTarget) {\n`;
+        code += `                document.querySelector('.login100-form-btn').click();\n`;
+        code += `                clearInterval(submitCheckInterval);\n`;
+        code += `            }\n`;
+        code += `        }, 1000);\n`;
+        code += `    }\n\n`;
+
+        code += `    if (window.location.href.includes("dashboard/index")) {\n`;
+        code += `        const actionCheckInterval = setInterval(() => {\n`;
+        code += `            const now = new Date();\n`;
+        code += `            const actionTarget = new Date('${actionDate.value}T${actionTime.value}');\n`;
+        code += `            if (now >= actionTarget) {\n`;
+        code += `                document.querySelector('#${actionButtonValue}').click();\n`;
+        code += `                clearInterval(actionCheckInterval);\n`;
+        code += `            }\n`;
+        code += `        }, 1000);\n`;
+        code += `    }\n`;
+        code += `})();\n`;
+
+        tampermonkeyCode.value = code;
+    });
+
+    copyTampermonkeyCodeBtn.addEventListener('click', function() {
+        tampermonkeyCode.select();
+        document.execCommand('copy');
+        alert('Le script Tampermonkey a été copié dans le presse-papiers.');
+    });
+</script>
+
+</body>
+</html>
