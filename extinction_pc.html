@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmer l'Extinction du PC</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #62b5ad, #104f73);
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+        .container2 {
+            background-color: #204f23;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+            animation: fade-in 2s ease-in-out;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            background-color: #575757;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="programmation_tt.html">Programmer action pour TT</a></li>
+        <li><a href="extinction_pc.html">Programmer l'extinction du PC</a></li>
+        <li><a href="script_tampermonkey.html">Génération de Script Tampermonkey</a></li>
+    </ul>
+</nav>
+
+<div class="container2">
+    <h2>Programmer l'extinction du PC</h2>
+
+    <div class="form-group">
+        <label for="shutdownTime">Heure exacte pour l'extinction (HH:MM:SS) :</label>
+        <input type="time" id="shutdownTime" step="1">
+    </div>
+
+    <button id="generateShutdownCodeBtn">Générer le code d'extinction</button>
+
+    <div class="form-group">
+        <label for="shutdownCode">Code généré :</label>
+        <textarea id="shutdownCode" readonly></textarea>
+    </div>
+
+    <button id="copyShutdownCodeBtn">Copier le code d'extinction</button>
+</div>
+
+<script>
+    const generateShutdownCodeBtn = document.getElementById('generateShutdownCodeBtn');
+    const shutdownCode = document.getElementById('shutdownCode');
+    const shutdownTimeInput = document.getElementById('shutdownTime');
+    
+    generateShutdownCodeBtn.addEventListener('click', function() {
+        const now = new Date(); // Heure actuelle
+        const shutdownTime = shutdownTimeInput.value; // Heure saisie par l'utilisateur
+
+        if (!shutdownTime) {
+            alert("Veuillez entrer une heure pour l'extinction.");
+            return;
+        }
+
+        const timeParts = shutdownTime.split(':');
+        const shutdownDate = new Date();
+        shutdownDate.setHours(timeParts[0]);
+        shutdownDate.setMinutes(timeParts[1]);
+        shutdownDate.setSeconds(timeParts[2]);
+
+        const timeDifference = shutdownDate.getTime() - now.getTime();
+
+        if (timeDifference <= 0) {
+            alert("L'heure d'extinction doit être après l'heure actuelle.");
+            return;
+        }
+
+        const totalSeconds = Math.floor(timeDifference / 1000);
+        const shutdownCommand = `shutdown -s -t ${totalSeconds}`;
+        shutdownCode.value = shutdownCommand;
+    });
+
+    copyShutdownCodeBtn.addEventListener('click', function() {
+        shutdownCode.select();
+        document.execCommand('copy');
+        alert('Le code d\'extinction a été copié dans le presse-papiers.');
+    });
+</script>
+
+</body>
+</html>
