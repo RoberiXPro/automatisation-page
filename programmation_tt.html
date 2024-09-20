@@ -60,13 +60,11 @@
         <li><a href="script_tampermonkey.html">Génération de Script Tampermonkey</a></li>
     </ul>
 </nav>
-
 <div class="container1">
-    <header>
-        <img src="https://i.postimg.cc/cCnSqFrH/BOB.png" alt="Logo" class="logo">
-    </header>
+<header>
+    <img src="https://i.postimg.cc/cCnSqFrH/BOB.png" alt="Logo" class="logo">
+</header>
     <h2>Programmer action pour TT</h2>
-
     <div class="form-group">
         <label for="actionType">Choisir l'action :</label>
         <select id="actionType">
@@ -100,6 +98,12 @@
         </select>
     </div>
 
+    <!-- Heure exacte pour le premier bouton -->
+    <div class="form-group">
+        <label for="firstButtonTime">Heure exacte pour le premier bouton (HH:MM:SS) :</label>
+        <input type="time" id="firstButtonTime" step="1">
+    </div>
+
     <div id="secondButtonSelection" class="form-group" style="display:none;">
         <label for="secondButton">Choisir deuxième bouton :</label>
         <select id="secondButton">
@@ -110,6 +114,7 @@
         </select>
     </div>
 
+    <!-- Heure exacte pour le deuxième bouton -->
     <div id="secondButtonTimeSelection" class="form-group" style="display:none;">
         <label for="secondButtonTime">Heure exacte pour le deuxième bouton (HH:MM:SS) :</label>
         <input type="time" id="secondButtonTime" step="1">
@@ -123,6 +128,7 @@
         </select>
     </div>
 
+    <!-- Heure exacte pour le troisième bouton -->
     <div id="thirdButtonTimeSelection" class="form-group" style="display:none;">
         <label for="thirdButtonTime">Heure exacte pour le troisième bouton (HH:MM:SS) :</label>
         <input type="time" id="thirdButtonTime" step="1">
@@ -155,7 +161,7 @@
         const action = this.value;
 
         if (action === 'simple') {
-            pauseTypeSelection.style.display = 'none';
+            pauseTypeSelection.style.display = firstButton.value === 'btn-ctrl-pause' ? 'none' : 'none';
             secondButtonSelection.style.display = 'none';
             secondButtonTimeSelection.style.display = 'none';
             thirdButtonSelection.style.display = 'none';
@@ -177,7 +183,11 @@
 
     firstButton.addEventListener('change', function() {
         const action = actionType.value;
-        pauseTypeSelection.style.display = this.value === 'btn-ctrl-pause' && action !== 'simple' ? 'block' : 'none';
+        if (this.value === 'btn-ctrl-pause') {
+            pauseTypeSelection.style.display = action !== 'simple' ? 'block' : 'none';
+        } else {
+            pauseTypeSelection.style.display = 'none';
+        }
     });
 
     generateCodeBtn.addEventListener('click', function() {
@@ -219,13 +229,12 @@
         document.execCommand('copy');
         alert('Cliqueo le OK pour confirmer le copie!');
     });
-
-    $(document).ready(function() {
-        $("#generateCodeBtn").on("click", function() {
-            $(".form-group").fadeIn(1000); // Effet de fondu
-        });
+	$(document).ready(function() {
+    $("#generateCodeBtn").on("click", function() {
+        $(".form-group").fadeIn(1000); // Effet de fondu
     });
-</script>
+});
 
+</script>
 </body>
 </html>
