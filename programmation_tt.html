@@ -12,6 +12,7 @@
             padding: 20px;
             margin: 0;
         }
+
         .container1 {
             background-color: #204f73;
             padding: 20px;
@@ -21,14 +22,24 @@
             margin: auto;
             animation: fade-in 1s ease-in-out;
         }
+
         @keyframes fade-in {
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
+        h2 {
+            text-align: center;
+            color: #ffeb3b;
+        }
+
         nav {
             background-color: #333;
-            overflow: hidden;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
+
         nav ul {
             list-style-type: none;
             margin: 0;
@@ -36,18 +47,82 @@
             display: flex;
             justify-content: center;
         }
+
         nav ul li {
-            display: inline;
+            margin: 0 15px;
         }
+
         nav ul li a {
             display: block;
+            padding: 10px 20px;
             color: white;
-            text-align: center;
-            padding: 14px 20px;
             text-decoration: none;
+            background-color: #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
         }
+
         nav ul li a:hover {
-            background-color: #575757;
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            resize: none;
+            height: 150px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ffeb3b;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            color: #333;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffca28;
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #dedede;
+        }
+
+        img.logo {
+            display: block;
+            margin: 0 auto;
+            width: 150px;
+            animation: logo-bounce 2s infinite;
+        }
+
+        @keyframes logo-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
@@ -60,13 +135,16 @@
         <li><a href="script_tampermonkey.html">Génération de Script Tampermonkey</a></li>
     </ul>
 </nav>
+
 <div class="container1">
 <header>
     <img src="https://i.postimg.cc/cCnSqFrH/BOB.png" alt="Logo" class="logo">
 </header>
+
     <h2>Programmer action pour TT</h2>
+
     <div class="form-group">
-        <label for="actionType">Choisir l'action :</label><br>
+        <label for="actionType">Choisir l'action :</label>
         <select id="actionType">
             <option value="simple">Simple Action</option>
             <option value="double">Double Action</option>
@@ -75,7 +153,7 @@
     </div>
 
     <div id="buttonSelection" class="form-group">
-        <label for="firstButton">Choisir premier bouton :</label><br>
+        <label for="firstButton">Choisir premier bouton :</label>
         <select id="firstButton">
             <option value="btn-ctrl-pause">Bouton Pause</option>
             <option value="confirmTakingPause">Confirmation Pause</option>
@@ -86,7 +164,7 @@
     </div>
 
     <div id="pauseTypeSelection" class="form-group" style="display:none;">
-        <label for="pauseType">Choisir le type de pause :</label><br>
+        <label for="pauseType">Choisir le type de pause :</label>
         <select id="pauseType">
             <option value="1">Pause pipi</option>
             <option value="2">Dejeuner</option>
@@ -98,14 +176,13 @@
         </select>
     </div>
 
-    <!-- Heure exacte pour le premier bouton -->
     <div class="form-group">
-        <label for="firstButtonTime">Heure exacte pour le premier bouton (HH:MM:SS) :</label><br>
+        <label for="firstButtonTime">Heure exacte pour le premier bouton (HH:MM:SS) :</label>
         <input type="time" id="firstButtonTime" step="1">
     </div>
 
     <div id="secondButtonSelection" class="form-group" style="display:none;">
-        <label for="secondButton">Choisir deuxième bouton :</label><br>
+        <label for="secondButton">Choisir deuxième bouton :</label>
         <select id="secondButton">
             <option value="confirmTakingPause">Confirmation Pause</option>
             <option value="btn-ctrl-fin">Fin shift</option>
@@ -114,9 +191,8 @@
         </select>
     </div>
 
-    <!-- Heure exacte pour le deuxième bouton -->
     <div id="secondButtonTimeSelection" class="form-group" style="display:none;">
-        <label for="secondButtonTime">Heure exacte pour le deuxième bouton (HH:MM:SS) :</label><br>
+        <label for="secondButtonTime">Heure exacte pour le deuxième bouton (HH:MM:SS) :</label>
         <input type="time" id="secondButtonTime" step="1">
     </div>
 
@@ -128,21 +204,19 @@
         </select>
     </div>
 
-    <!-- Heure exacte pour le troisième bouton -->
     <div id="thirdButtonTimeSelection" class="form-group" style="display:none;">
-        <label for="thirdButtonTime">Heure exacte pour le troisième bouton (HH:MM:SS) :</label><br>
+        <label for="thirdButtonTime">Heure exacte pour le troisième bouton (HH:MM:SS) :</label>
         <input type="time" id="thirdButtonTime" step="1">
     </div>
 
     <button id="generateCodeBtn">Générer le code</button>
 
     <div class="form-group">
-        <label for="generatedCode">Code généré ici:</label><br>
+        <label for="generatedCode">Code généré ici :</label>
         <textarea id="generatedCode" readonly></textarea>
     </div>
 
     <button id="copyCodeBtn">Copier</button>
-
 </div>
 
 <script>
@@ -161,7 +235,7 @@
         const action = this.value;
 
         if (action === 'simple') {
-            pauseTypeSelection.style.display = firstButton.value === 'btn-ctrl-pause' ? 'none' : 'none';
+            pauseTypeSelection.style.display = 'none';
             secondButtonSelection.style.display = 'none';
             secondButtonTimeSelection.style.display = 'none';
             thirdButtonSelection.style.display = 'none';
@@ -191,14 +265,13 @@
     });
 
     generateCodeBtn.addEventListener('click', function() {
-        const action = actionType.value;
         const firstButtonId = firstButton.value;
         const firstButtonTime = document.getElementById('firstButtonTime').value;
         const pauseType = document.getElementById('pauseType').value;
         let code = `var firstButtonTime = new Date();\nfirstButtonTime.setHours(..."${firstButtonTime}".split(':'));\n`;
         code += `setTimeout(function() {\n    var firstButton = document.getElementById("${firstButtonId}");\n`;
 
-        if (firstButtonId === 'btn-ctrl-pause' && action !== 'simple') {
+        if (firstButtonId === 'btn-ctrl-pause' && actionType.value !== 'simple') {
             code += `    firstButton.click();\n`;
             code += `    document.getElementById('pause_libelle').value = "${pauseType}";\n`;
         } else {
@@ -207,18 +280,20 @@
 
         code += `    console.log("Premier bouton cliqué");\n}, firstButtonTime.getTime() - new Date().getTime());\n`;
 
-        if (action === 'double' || action === 'triple') {
+        if (actionType.value === 'double' || actionType.value === 'triple') {
             const secondButtonId = document.getElementById('secondButton').value;
             const secondButtonTime = document.getElementById('secondButtonTime').value;
             code += `var secondButtonTime = new Date();\nsecondButtonTime.setHours(..."${secondButtonTime}".split(':'));\n`;
-            code += `setTimeout(function() {\n    var secondButton = document.getElementById("${secondButtonId}");\n    secondButton.click();\n    console.log("Deuxième bouton cliqué");\n}, secondButtonTime.getTime() - new Date().getTime());\n`;
+            code += `setTimeout(function() {\n    var secondButton = document.getElementById("${secondButtonId}");\n`;
+            code += `    secondButton.click();\n    console.log("Deuxième bouton cliqué");\n}, secondButtonTime.getTime() - new Date().getTime());\n`;
         }
 
-        if (action === 'triple') {
+        if (actionType.value === 'triple') {
             const thirdButtonId = document.getElementById('thirdButton').value;
             const thirdButtonTime = document.getElementById('thirdButtonTime').value;
             code += `var thirdButtonTime = new Date();\nthirdButtonTime.setHours(..."${thirdButtonTime}".split(':'));\n`;
-            code += `setTimeout(function() {\n    var thirdButton = document.getElementById("${thirdButtonId}");\n    thirdButton.click();\n    console.log("Troisième bouton cliqué");\n}, thirdButtonTime.getTime() - new Date().getTime());\n`;
+            code += `setTimeout(function() {\n    var thirdButton = document.getElementById("${thirdButtonId}");\n`;
+            code += `    thirdButton.click();\n    console.log("Troisième bouton cliqué");\n}, thirdButtonTime.getTime() - new Date().getTime());\n`;
         }
 
         generatedCode.value = code;
@@ -227,14 +302,15 @@
     copyCodeBtn.addEventListener('click', function() {
         generatedCode.select();
         document.execCommand('copy');
-        alert('Cliqueo le OK pour confirmer le copie!');
+        alert('Le code a été copié dans le presse-papiers.');
     });
-	$(document).ready(function() {
-    $("#generateCodeBtn").on("click", function() {
-        $(".form-group").fadeIn(1000); // Effet de fondu
-    });
-});
 
+    $(document).ready(function() {
+        $("#generateCodeBtn").on("click", function() {
+            $(".form-group").fadeIn(1000); // Effet de fondu
+        });
+    });
 </script>
+
 </body>
 </html>
