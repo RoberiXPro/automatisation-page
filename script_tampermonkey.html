@@ -5,38 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Génération de Script Tampermonkey</title>
      <style>
-     body {
+    body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(to right, #62b5ad, #104f73);
     color: #fff;
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 100vh;
-    flex-direction: column; /* Empile les éléments verticalement */
-}
-
-.container3 {
-    background-color: #204f73;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    width: 100%; /* S'adapte à la taille de l'écran */
-    animation: fade-in 1s ease-in-out;
-    margin: 20px auto; /* Ajoute une marge au-dessus et au-dessous */
-}
-
-@keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-h2 {
-    text-align: center;
-    color: #ffeb3b;
 }
 
 nav {
@@ -45,7 +23,7 @@ nav {
     border-radius: 10px;
     margin-bottom: 20px;
     text-align: center;
-    width: 100%; /* S'assure que le menu prend toute la largeur */
+    width: 100%;
 }
 
 nav ul {
@@ -75,8 +53,33 @@ nav ul li a:hover {
     transform: scale(1.05);
 }
 
+.container3 {
+    background-color: #204f73;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%; 
+    margin: 20px auto;
+    animation: fade-in 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+h2 {
+    text-align: center;
+    color: #ffeb3b;
+}
+
 .form-group {
     margin-bottom: 20px;
+    width: 100%;
 }
 
 label {
@@ -132,7 +135,6 @@ img.logo {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
 }
-
 
     </style>
 </head>
