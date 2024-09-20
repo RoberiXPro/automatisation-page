@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmer Action pour TT</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #62b5ad, #104f73);
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+        .container1 {
+            background-color: #204f73;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+            animation: fade-in 1s ease-in-out;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            background-color: #575757;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="programmation_tt.html">Programmer action pour TT</a></li>
+        <li><a href="extinction_pc.html">Programmer l'extinction du PC</a></li>
+        <li><a href="script_tampermonkey.html">Génération de Script Tampermonkey</a></li>
+    </ul>
+</nav>
+
+<div class="container1">
+    <header>
+        <img src="https://i.postimg.cc/cCnSqFrH/BOB.png" alt="Logo" class="logo">
+    </header>
+    <h2>Programmer action pour TT</h2>
+
+    <div class="form-group">
+        <label for="actionType">Choisir l'action :</label>
+        <select id="actionType">
+            <option value="simple">Simple Action</option>
+            <option value="double">Double Action</option>
+            <option value="triple">Triple Action</option>
+        </select>
+    </div>
+
+    <div id="buttonSelection" class="form-group">
+        <label for="firstButton">Choisir premier bouton :</label>
+        <select id="firstButton">
+            <option value="btn-ctrl-pause">Bouton Pause</option>
+            <option value="confirmTakingPause">Confirmation Pause</option>
+            <option value="btn-ctrl-fin">Fin shift</option>
+            <option value="confirmFinShift">Confirm Fin Shift</option>
+            <option value="btn-ctrl-reprise">Reprendre</option>
+        </select>
+    </div>
+
+    <div id="pauseTypeSelection" class="form-group" style="display:none;">
+        <label for="pauseType">Choisir le type de pause :</label>
+        <select id="pauseType">
+            <option value="1">Pause pipi</option>
+            <option value="2">Dejeuner</option>
+            <option value="3">Gouter</option>
+            <option value="4">Panne technique</option>
+            <option value="5">Autres</option>
+            <option value="6">Consultation doc</option>
+            <option value="7">Changement de site</option>
+        </select>
+    </div>
+
+    <div id="secondButtonSelection" class="form-group" style="display:none;">
+        <label for="secondButton">Choisir deuxième bouton :</label>
+        <select id="secondButton">
+            <option value="confirmTakingPause">Confirmation Pause</option>
+            <option value="btn-ctrl-fin">Fin shift</option>
+            <option value="confirmFinShift">Confirm Fin Shift</option>
+            <option value="btn-ctrl-reprise">Reprendre</option>
+        </select>
+    </div>
+
+    <div id="secondButtonTimeSelection" class="form-group" style="display:none;">
+        <label for="secondButtonTime">Heure exacte pour le deuxième bouton (HH:MM:SS) :</label>
+        <input type="time" id="secondButtonTime" step="1">
+    </div>
+
+    <div id="thirdButtonSelection" class="form-group" style="display:none;">
+        <label for="thirdButton">Choisir troisième bouton :</label>
+        <select id="thirdButton">
+            <option value="btn-ctrl-reprise">Reprendre</option>
+            <option value="confirmFinShift">Confirm Fin Shift</option>
+        </select>
+    </div>
+
+    <div id="thirdButtonTimeSelection" class="form-group" style="display:none;">
+        <label for="thirdButtonTime">Heure exacte pour le troisième bouton (HH:MM:SS) :</label>
+        <input type="time" id="thirdButtonTime" step="1">
+    </div>
+
+    <button id="generateCodeBtn">Générer le code</button>
+
+    <div class="form-group">
+        <label for="generatedCode">Code généré ici:</label>
+        <textarea id="generatedCode" readonly></textarea>
+    </div>
+
+    <button id="copyCodeBtn">Copier</button>
+
+</div>
+
+<script>
+    const actionType = document.getElementById('actionType');
+    const firstButton = document.getElementById('firstButton');
+    const pauseTypeSelection = document.getElementById('pauseTypeSelection');
+    const secondButtonSelection = document.getElementById('secondButtonSelection');
+    const secondButtonTimeSelection = document.getElementById('secondButtonTimeSelection');
+    const thirdButtonSelection = document.getElementById('thirdButtonSelection');
+    const thirdButtonTimeSelection = document.getElementById('thirdButtonTimeSelection');
+    const generateCodeBtn = document.getElementById('generateCodeBtn');
+    const generatedCode = document.getElementById('generatedCode');
+    const copyCodeBtn = document.getElementById('copyCodeBtn');
+
+    actionType.addEventListener('change', function() {
+        const action = this.value;
+
+        if (action === 'simple') {
+            pauseTypeSelection.style.display = 'none';
+            secondButtonSelection.style.display = 'none';
+            secondButtonTimeSelection.style.display = 'none';
+            thirdButtonSelection.style.display = 'none';
+            thirdButtonTimeSelection.style.display = 'none';
+        } else if (action === 'double') {
+            secondButtonSelection.style.display = 'block';
+            secondButtonTimeSelection.style.display = 'block';
+            thirdButtonSelection.style.display = 'none';
+            thirdButtonTimeSelection.style.display = 'none';
+            pauseTypeSelection.style.display = firstButton.value === 'btn-ctrl-pause' ? 'block' : 'none';
+        } else if (action === 'triple') {
+            secondButtonSelection.style.display = 'block';
+            secondButtonTimeSelection.style.display = 'block';
+            thirdButtonSelection.style.display = 'block';
+            thirdButtonTimeSelection.style.display = 'block';
+            pauseTypeSelection.style.display = firstButton.value === 'btn-ctrl-pause' ? 'block' : 'none';
+        }
+    });
+
+    firstButton.addEventListener('change', function() {
+        const action = actionType.value;
+        pauseTypeSelection.style.display = this.value === 'btn-ctrl-pause' && action !== 'simple' ? 'block' : 'none';
+    });
+
+    generateCodeBtn.addEventListener('click', function() {
+        const action = actionType.value;
+        const firstButtonId = firstButton.value;
+        const firstButtonTime = document.getElementById('firstButtonTime').value;
+        const pauseType = document.getElementById('pauseType').value;
+        let code = `var firstButtonTime = new Date();\nfirstButtonTime.setHours(..."${firstButtonTime}".split(':'));\n`;
+        code += `setTimeout(function() {\n    var firstButton = document.getElementById("${firstButtonId}");\n`;
+
+        if (firstButtonId === 'btn-ctrl-pause' && action !== 'simple') {
+            code += `    firstButton.click();\n`;
+            code += `    document.getElementById('pause_libelle').value = "${pauseType}";\n`;
+        } else {
+            code += `    firstButton.click();\n`;
+        }
+
+        code += `    console.log("Premier bouton cliqué");\n}, firstButtonTime.getTime() - new Date().getTime());\n`;
+
+        if (action === 'double' || action === 'triple') {
+            const secondButtonId = document.getElementById('secondButton').value;
+            const secondButtonTime = document.getElementById('secondButtonTime').value;
+            code += `var secondButtonTime = new Date();\nsecondButtonTime.setHours(..."${secondButtonTime}".split(':'));\n`;
+            code += `setTimeout(function() {\n    var secondButton = document.getElementById("${secondButtonId}");\n    secondButton.click();\n    console.log("Deuxième bouton cliqué");\n}, secondButtonTime.getTime() - new Date().getTime());\n`;
+        }
+
+        if (action === 'triple') {
+            const thirdButtonId = document.getElementById('thirdButton').value;
+            const thirdButtonTime = document.getElementById('thirdButtonTime').value;
+            code += `var thirdButtonTime = new Date();\nthirdButtonTime.setHours(..."${thirdButtonTime}".split(':'));\n`;
+            code += `setTimeout(function() {\n    var thirdButton = document.getElementById("${thirdButtonId}");\n    thirdButton.click();\n    console.log("Troisième bouton cliqué");\n}, thirdButtonTime.getTime() - new Date().getTime());\n`;
+        }
+
+        generatedCode.value = code;
+    });
+
+    copyCodeBtn.addEventListener('click', function() {
+        generatedCode.select();
+        document.execCommand('copy');
+        alert('Cliqueo le OK pour confirmer le copie!');
+    });
+
+    $(document).ready(function() {
+        $("#generateCodeBtn").on("click", function() {
+            $(".form-group").fadeIn(1000); // Effet de fondu
+        });
+    });
+</script>
+
+</body>
+</html>
