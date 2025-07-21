@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outils RH - RoberiX</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .nav {
+      display: flex;
+      justify-content: center;
+      background: #007bff;
+      padding: 10px 0;
+    }
+    .nav button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    .nav button.active {
+      background: white;
+      color: #007bff;
+      border-radius: 5px;
+    }
+    .tool-section {
+      display: none;
+    }
+    .tool-section.active {
+      display: block;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #999;
+      margin: 30px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <button onclick="showTool('outil1')" id="btn-outil1" class="active">Démission avec préavis</button>
+    <button onclick="showTool('outil2')" id="btn-outil2">Démission sans préavis</button>
+    <button onclick="showTool('outil3')" id="btn-outil3">Licenciement avec préavis</button>
+    <button onclick="showTool('outil4')" id="btn-outil4">Majoration férié</button>
+  </div>
+
+  <div id="outil1" class="tool-section active">
+    <!-- Le contenu de OutilsSalaire2.html sera inséré ici -->
+  </div>
+  <div id="outil2" class="tool-section">
+    <!-- Le contenu de OutilDemissionsanspreavis.html sera inséré ici -->
+  </div>
+  <div id="outil3" class="tool-section">
+    <!-- Le contenu de OutilLicenciementavecpreavis.html sera inséré ici -->
+  </div>
+  <div id="outil4" class="tool-section">
+    <!-- Le contenu de Outilmajorationferie.html sera inséré ici -->
+  </div>
+
+  <footer>
+    © RoberiX 2025
+  </footer>
+
+  <script>
+    function showTool(id) {
+      const sections = document.querySelectorAll('.tool-section');
+      const buttons = document.querySelectorAll('.nav button');
+
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+      buttons.forEach(button => {
+        button.classList.remove('active');
+      });
+
+      document.getElementById(id).classList.add('active');
+      document.getElementById('btn-' + id).classList.add('active');
+    }
+  </script>
+</body>
+</html>
