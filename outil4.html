@@ -92,29 +92,29 @@
   <footer>© RoberiX 2025</footer>
 
   <script>
-    function calculerMajoration() {
-      const salaire = parseFloat(document.getElementById('salaire').value);
-      const heures = parseFloat(document.getElementById('heures').value);
-      const coef = parseFloat(document.getElementById('majoration').value);
-      const result = document.getElementById('resultat');
+function calculerMajoration() {
+  const salaire = parseFloat(document.getElementById('salaire').value);
+  const heures = parseFloat(document.getElementById('heures').value);
+  const coef = parseFloat(document.getElementById('majoration').value);
+  const result = document.getElementById('resultat');
 
-      if (isNaN(salaire) || isNaN(heures) || isNaN(coef)) {
-        result.innerHTML = "<p style='color:red;'>Veuillez remplir tous les champs correctement.</p>";
-        return;
-      }
+  if (isNaN(salaire) || isNaN(heures) || isNaN(coef)) {
+    result.innerHTML = "<p style='color:red;'>Veuillez remplir tous les champs correctement.</p>";
+    return;
+  }
 
-      const tauxHoraire = salaire / 173.33;
-      const montant = tauxHoraire * heures * coef;
+  const tauxHoraire = salaire / 173.33;
+  const montant = Math.ceil(tauxHoraire * heures * coef / 100) * 100;
 
-      result.innerHTML = `
-        <h3>Résultat :</h3>
-        <p>💰 Salaire horaire : <strong>${tauxHoraire.toLocaleString('fr-FR', {minimumFractionDigits: 2})} Ar</strong></p>
-        <p>⏱️ Heures travaillées : <strong>${heures} h</strong></p>
-        <p>⚡ Majoration : <strong>${coef * 100}%</strong></p>
-        <hr/>
-        <p><strong>💵 Montant majoré à recevoir :</strong> ${montant.toLocaleString('fr-FR', {minimumFractionDigits: 2})} Ar</p>
-      `;
-    }
+  result.innerHTML = `
+    <h3>Résultat :</h3>
+    <p>💰 Salaire horaire : <strong>${tauxHoraire.toLocaleString('fr-FR', {minimumFractionDigits: 2})} Ar</strong></p>
+    <p>⏱️ Heures travaillées : <strong>${heures} h</strong></p>
+    <p>⚡ Majoration : <strong>${coef * 100}%</strong></p>
+    <hr/>
+    <p><strong>💵 Montant majoré à recevoir :</strong> ${montant.toLocaleString('fr-FR')} Ar</p>
+  `;
+}
   </script>
 </body>
 </html>
