@@ -66,9 +66,9 @@
 </head>
 <body>
   <div class="container">
-    <h1>Calculateur STC - Démission avec préavis</h1>
+    <h1>Calculateur - Démission avec préavis</h1>
 
-    <label>Salaire brut mensuel (Ariary)</label>
+    <label>Salaire Net mensuel (Ariary)</label>
     <input type="number" id="salaire" min="0" />
 
     <label>Ancienneté (en années)</label>
@@ -77,9 +77,9 @@
     <label>Jours de congés non pris (ouvrables)</label>
     <input type="number" id="conges" min="0" />
 
-    <label>Note de la dernière prime semestrielle</label>
+    <label>Note Prime semestrielle*</label>
     <select id="note">
-      <option value="0">Pas de prime / Non concerné</option>
+      <option value="0">Pas de prime</option>
       <option value="1.5">A+ (150%)</option>
       <option value="1.2">A (120%)</option>
       <option value="1">B+ (100%)</option>
@@ -87,7 +87,7 @@
       <option value="0.35">C (35%)</option>
       <option value="0.15">B- (15%)</option>
     </select>
-    <small>Laissez sur "Pas de prime" si non applicable (ex: hors juin/décembre)</small>
+    <small>Laissez sur "Pas de prime" si hors juin/décembre)</small>
 
     <button onclick="calculerSTC()">Calculer le STC</button>
 
